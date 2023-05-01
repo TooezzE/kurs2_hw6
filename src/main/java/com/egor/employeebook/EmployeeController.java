@@ -22,7 +22,6 @@ public class EmployeeController {
                               @RequestParam("lastName") String lastName) {
         try {
             employeeService.addEmployee(firstName, lastName);
-            System.out.println();
             return "Сотрудник " + employeeService.addEmployee(firstName, lastName).toString() + " добавлен";
         } catch (EmployeeStorageIsFullException e) {
             return "Невозможно добавить сотрудника. Список переполнен.";
