@@ -22,7 +22,7 @@ public class EmployeeController {
                               @RequestParam("lastName") String lastName) {
         try {
             employeeService.addEmployee(firstName, lastName);
-            return "Сотрудник " + employeeService.addEmployee(firstName, lastName).toString() + " добавлен";
+            return "Сотрудник " + firstName + " " + lastName + " добавлен";
         } catch (EmployeeStorageIsFullException e) {
             return "Невозможно добавить сотрудника. Список переполнен.";
         } catch (EmployeeAlreadyAddedException e) {
@@ -35,7 +35,7 @@ public class EmployeeController {
                                  @RequestParam("lastName") String lastName) {
         try {
             employeeService.removeEmployee(firstName, lastName);
-            return "Сотрудник " + employeeService.removeEmployee(firstName, lastName).toString() + " удален";
+            return "Сотрудник " + firstName + " " + lastName + " удален";
         } catch (EmployeeNotFoundException e) {
             return "Сотрудник с именем " + firstName + " " + lastName + " не найден.";
         }
@@ -50,4 +50,10 @@ public class EmployeeController {
             return "Результат поиска: сотрудник с именем " + firstName + " " + lastName + " не найден.";
         }
     }
+
+    @GetMapping(path = "/printAll")
+    public String[] printEmployees(){
+        return  employeeService.printEmployees();
+    }
+
 }
