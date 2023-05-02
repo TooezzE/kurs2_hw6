@@ -13,7 +13,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     List<Employee> employeeList = new ArrayList<>();
 
 @Override
-    public void addEmployee(String firstName, String lastName){
+    public Employee addEmployee(String firstName, String lastName){
         Employee employee = null;
         if(employeeList.size() >= 10){
             throw new EmployeeStorageIsFullException("Нельзя добавить сотрудника. Коллекция переполнена");
@@ -25,10 +25,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
         employee = new Employee(firstName, lastName);
         employeeList.add(employee);
+        return employee;
     }
 
     @Override
-    public void removeEmployee(String firstName, String lastName) {
+    public Employee removeEmployee(String firstName, String lastName) {
         Employee employee = null;
         for (int i = 0; i < employeeList.size(); i++) {
             if (employeeList.get(i).getFirstName().equals(firstName) && employeeList.get(i).getLastName().equals(lastName)) {
@@ -40,7 +41,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         } else {
             employeeList.remove(employee);
         }
+        return employee;
     }
+
 
     @Override
     public Employee findEmployee(String firstName, String lastName){

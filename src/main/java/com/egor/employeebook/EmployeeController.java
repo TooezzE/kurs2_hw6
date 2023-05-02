@@ -3,10 +3,8 @@ package com.egor.employeebook;
 import com.egor.employeebook.exceptions.EmployeeAlreadyAddedException;
 import com.egor.employeebook.exceptions.EmployeeNotFoundException;
 import com.egor.employeebook.exceptions.EmployeeStorageIsFullException;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/employee")
@@ -21,8 +19,7 @@ public class EmployeeController {
     public String addEmployee(@RequestParam("firstName") String firstName,
                               @RequestParam("lastName") String lastName) {
         try {
-            employeeService.addEmployee(firstName, lastName);
-            return "Сотрудник " + firstName + " " + lastName + " добавлен";
+            return "Added " + employeeService.addEmployee(firstName, lastName).toString();
         } catch (EmployeeStorageIsFullException e) {
             return "Невозможно добавить сотрудника. Список переполнен.";
         } catch (EmployeeAlreadyAddedException e) {
@@ -34,8 +31,7 @@ public class EmployeeController {
     public String removeEmployee(@RequestParam("firstName") String firstName,
                                  @RequestParam("lastName") String lastName) {
         try {
-            employeeService.removeEmployee(firstName, lastName);
-            return "Сотрудник " + firstName + " " + lastName + " удален";
+            return "Deleted " + employeeService.removeEmployee(firstName, lastName).toString();
         } catch (EmployeeNotFoundException e) {
             return "Сотрудник с именем " + firstName + " " + lastName + " не найден.";
         }
