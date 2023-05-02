@@ -12,6 +12,7 @@ import java.util.List;
 public class EmployeeServiceImpl implements EmployeeService {
     List<Employee> employeeList = new ArrayList<>();
 
+@Override
     public Employee addEmployee(String firstName, String lastName){
         Employee employee = null;
         if(employeeList.size() >= 10){
@@ -27,6 +28,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employee;
     }
 
+    @Override
     public Employee removeEmployee(String firstName, String lastName) {
         Employee employee = null;
         for (int i = 0; i < employeeList.size(); i++) {
@@ -38,9 +40,12 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new EmployeeNotFoundException("Сотрудник не найден в коллекции");
         } else {
             employeeList.remove(employee);
-            return employee;
         }
+        return employee;
     }
+
+
+    @Override
     public Employee findEmployee(String firstName, String lastName){
         Employee employee = null;
         for (int i = 0; i < employeeList.size(); i++) {
@@ -52,5 +57,14 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new EmployeeNotFoundException("Сотрудник не найден в коллекции");
         }
         return employee;
+    }
+
+    @Override
+    public String[] printEmployees() {
+        String[] print = new String[employeeList.size()];
+         for (int i = 0; i < employeeList.size(); i++) {
+              print[i] = employeeList.get(i).toString();
+         }
+        return print;
     }
 }
