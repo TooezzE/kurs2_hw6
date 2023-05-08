@@ -6,6 +6,9 @@ import com.egor.employeebook.exceptions.EmployeeStorageIsFullException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
+import java.util.Collections;
+
 @RestController
 @RequestMapping(path = "/employee")
 public class EmployeeController {
@@ -48,7 +51,7 @@ public class EmployeeController {
     }
 
     @GetMapping(path = "/printAll")
-    public String[] printEmployees(){
+    public String printEmployees(){
         return  employeeService.printEmployees();
     }
 

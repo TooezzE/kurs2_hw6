@@ -6,12 +6,10 @@ import java.util.Objects;
 public class Employee {
     private String firstName;
     private String lastName;
-    private Integer id = 1;
 
     public Employee(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.id++;
     }
 
     public String getFirstName() {
@@ -29,10 +27,10 @@ public class Employee {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
-    public Integer getId() {
-        return id;
+    public String getFullName(){
+        return firstName + " " + lastName;
     }
+
 
     @Override
     public boolean equals(Object o) {
