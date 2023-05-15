@@ -1,15 +1,18 @@
 package com.egor.employeebook;
 
-import java.util.Map;
 import java.util.Objects;
 
 public class Employee {
     private String firstName;
     private String lastName;
+    private int salary;
+    private int departamentId;
 
-    public Employee(String firstName, String lastName) {
+    public Employee(String firstName, String lastName, int salary, int departamentId) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.salary = salary;
+        this.departamentId = departamentId;
     }
 
     public String getFirstName() {
@@ -27,6 +30,23 @@ public class Employee {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public int getSalary() {
+        return salary;
+    }
+
+    public void setSalary(int salary) {
+        this.salary = salary;
+    }
+
+    public int getDepartamentId() {
+        return departamentId;
+    }
+
+    public void setDepartamentId(int departamentId) {
+        this.departamentId = departamentId;
+    }
+
     public String getFullName(){
         return firstName + " " + lastName;
     }
@@ -51,6 +71,6 @@ public class Employee {
         return " Сотрудник {" +
                 "Имя = '" + firstName + '\'' +
                 ", Фамилия = '" + lastName + '\'' +
-                "} ";
+                 "} ";
     }
 }

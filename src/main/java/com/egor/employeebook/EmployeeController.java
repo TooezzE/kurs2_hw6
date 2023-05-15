@@ -20,9 +20,11 @@ public class EmployeeController {
 
     @GetMapping(path = "/add")
     public String addEmployee(@RequestParam("firstName") String firstName,
-                              @RequestParam("lastName") String lastName) {
+                              @RequestParam("lastName") String lastName,
+                              @RequestParam("departamentId") int departamnetId,
+                              @RequestParam("salary") int salary) {
         try {
-            return "Added " + employeeService.addEmployee(firstName, lastName).toString();
+            return "Added " + employeeService.addEmployee(firstName, lastName, salary, departamnetId).toString();
         } catch (EmployeeStorageIsFullException e) {
             return "Невозможно добавить сотрудника. Список переполнен.";
         } catch (EmployeeAlreadyAddedException e) {
@@ -40,7 +42,7 @@ public class EmployeeController {
         }
     }
 
-    @GetMapping(path = "find")
+    @GetMapping(path = "/find")
     public String findEmployee(@RequestParam("firstName") String firstName,
                                @RequestParam("lastName") String lastName) {
         try {
@@ -50,9 +52,24 @@ public class EmployeeController {
         }
     }
 
-    @GetMapping(path = "/printAll")
+    @GetMapping(path = "/departaments/all")
     public String printEmployees(){
         return  employeeService.printEmployees();
+    }
+
+    @GetMapping(path = "/departaments/max-salary")
+    public Employee employeeWithMaxSalaryInDep(@RequestParam ("departamentId") int departamentId){
+        return employeeService.salaryMaxInDepartament(departamentId);
+    }
+
+    @GetMapping(path = "/departaments/min-salary")
+    public Employee employeeWithMinSalaryInDep(@RequestParam ("departamentId") int departamentId){
+        return employeeService.salaryMinInDepartament(departamentId);
+    }
+
+    @GetMapping(path = "/departaments/all")
+    public String printEmployeesOfDep(@RequestParam ("departamentId") int departamentId){
+        return "Ia";
     }
 
 }
